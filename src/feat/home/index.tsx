@@ -1,6 +1,5 @@
 import { navItems } from "@/const/navItems";
 import Link from "next/link";
-import React from "react";
 
 const HomeContainer = () => {
   const getTextSize = (name: string) => {
