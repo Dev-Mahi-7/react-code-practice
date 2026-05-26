@@ -3,9 +3,17 @@ import { ExpenseTrackerTypes } from "../types/ExpenseTrackerType";
 
 interface Props {
   expenses: ExpenseTrackerTypes[];
+  onEdit: (expense: ExpenseTrackerTypes) => void;
+  onDelete: (id: string) => void;
+  onView: (expense: ExpenseTrackerTypes) => void;
 }
 
-const ExpenseTrackerList: React.FC<Props> = ({ expenses }) => {
+const ExpenseTrackerList: React.FC<Props> = ({
+  expenses,
+  onEdit,
+  onDelete,
+  onView,
+}) => {
   return (
     <table className="w-full border-collapse border border-gray-300">
       <thead className="bg-amber-300">
@@ -28,14 +36,24 @@ const ExpenseTrackerList: React.FC<Props> = ({ expenses }) => {
 
             <td className="p-3 border">
               <div className="flex justify-center gap-2">
-                <button className="px-3 cursor-pointer py-1 rounded bg-blue-500 text-white">
+                <button
+                  onClick={() => onEdit(item)}
+                  className="px-3 cursor-pointer py-1 rounded bg-blue-500 text-white"
+                >
                   Edit
                 </button>
 
-                <button className="px-3 cursor-pointer py-1 rounded bg-red-500 text-white">
+                <button
+                  onClick={() => onDelete(item.id)}
+                  className="px-3 cursor-pointer py-1 rounded bg-red-500 text-white"
+                >
                   Delete
                 </button>
-                <button className="px-3 cursor-pointer py-1 rounded bg-green-500 text-white">
+
+                <button
+                  onClick={() => onView(item)}
+                  className="px-3 cursor-pointer py-1 rounded bg-green-500 text-white"
+                >
                   View
                 </button>
               </div>
