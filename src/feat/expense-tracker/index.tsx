@@ -8,6 +8,7 @@ import { expeseData } from "./const/expenseData";
 import ExpenseTrackerHeader from "./sections/ExpenseTrackerHeader";
 import ExpenseTrackerList from "./sections/ExpenseTrackerList";
 import MyContainer from "@/my-components/MyContainer";
+import { toast } from "sonner";
 
 const ExpenseTrackerContainer = () => {
   // Main Expenses State
@@ -76,6 +77,25 @@ const ExpenseTrackerContainer = () => {
     0,
   );
 
+  // Delete Expense
+  const handleDelete = (id: string) => {
+    setExpenses((prev) => prev.filter((item) => item.id !== id));
+
+    toast.success("Expense Deleted Successfully");
+  };
+
+  // Edit Expense
+  const handleEdit = (expense: ExpenseTrackerTypes) => {
+    toast.info(`Editing ${expense.title}`);
+  };
+
+  // View Expense
+  const handleView = (expense: ExpenseTrackerTypes) => {
+    toast.success(
+      `${expense.title} | ₹${expense.amount} | ${expense.category}`,
+    );
+  };
+
   return (
     <div className="min-h-screen p-6">
       <MyContainer>
@@ -116,7 +136,12 @@ const ExpenseTrackerContainer = () => {
 
         {/* Expense Table */}
         <div className="overflow-hidden">
-          <ExpenseTrackerList expenses={filteredExpenses} />
+          <ExpenseTrackerList
+            expenses={filteredExpenses}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            onView={handleView}
+          />
         </div>
       </MyContainer>
     </div>
